@@ -2,6 +2,7 @@ package com.example.umc9th.domain.mission.entity;
 
 import com.example.umc9th.domain.member.enums.Gender;
 import com.example.umc9th.domain.member.enums.SocialType;
+import com.example.umc9th.domain.store.entity.Store;
 import com.example.umc9th.global.entity.BaseEntity;
 import jakarta.persistence.*;
 /*
@@ -47,8 +48,9 @@ public class Mission extends BaseEntity {
 
     // store과 연관관계 생각해볼 것
     // 한 store에 여러 미션이 있다...
-    @OneToMany(mappedBy = "store")
-    private List<Mission> missionList = new ArrayList<>();
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "store_id")
+    private Store store;
 
 
 //    // Mission(1) to MemberMission(N)
