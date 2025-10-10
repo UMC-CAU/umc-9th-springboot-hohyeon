@@ -50,6 +50,7 @@ public class Mission extends BaseEntity {
     @OneToMany(mappedBy = "store")
     private List<Mission> missionList = new ArrayList<>();
 
+
 //    // Mission(1) to MemberMission(N)
 //    // 'mappedBy = "mission"' : MemberMission 엔티티에 있는 'mission' 필드가 연관관계의 주인임을 명시
 //    @OneToMany(mappedBy = "mission", cascade = CascadeType.ALL)
