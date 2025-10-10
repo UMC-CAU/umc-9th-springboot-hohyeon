@@ -45,7 +45,10 @@ public class Mission extends BaseEntity {
     @Column(name = "point")
     private Integer point;
 
-    //store과 연관관계 생각해볼 것
+    // store과 연관관계 생각해볼 것
+    // 한 store에 여러 미션이 있다...
+    @OneToMany(mappedBy = "store")
+    private List<Mission> missionList = new ArrayList<>();
 
 //    // Mission(1) to MemberMission(N)
 //    // 'mappedBy = "mission"' : MemberMission 엔티티에 있는 'mission' 필드가 연관관계의 주인임을 명시
