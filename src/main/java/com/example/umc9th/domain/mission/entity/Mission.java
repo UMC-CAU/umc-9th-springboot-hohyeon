@@ -2,6 +2,7 @@ package com.example.umc9th.domain.mission.entity;
 
 import com.example.umc9th.domain.member.enums.Gender;
 import com.example.umc9th.domain.member.enums.SocialType;
+import com.example.umc9th.domain.store.entity.Store;
 import com.example.umc9th.global.entity.BaseEntity;
 import jakarta.persistence.*;
 /*
@@ -45,8 +46,13 @@ public class Mission extends BaseEntity {
     @Column(name = "point")
     private Integer point;
 
-    //store과 연관관계 생각해볼 것
+    // store과 연관관계 생각해볼 것
+    // 한 store에 여러 미션이 있다...
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "store_id")
+    private Store store;
 
+    // 11시 커밋
 //    // Mission(1) to MemberMission(N)
 //    // 'mappedBy = "mission"' : MemberMission 엔티티에 있는 'mission' 필드가 연관관계의 주인임을 명시
 //    @OneToMany(mappedBy = "mission", cascade = CascadeType.ALL)
