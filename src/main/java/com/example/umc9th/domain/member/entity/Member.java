@@ -4,6 +4,7 @@ package com.example.umc9th.domain.member.entity;
 import com.example.umc9th.domain.member.enums.Gender;
 import com.example.umc9th.domain.member.enums.SocialType;
 import com.example.umc9th.domain.mission.entity.MemberMission;
+import com.example.umc9th.domain.review.entity.Review;
 import com.example.umc9th.global.entity.BaseEntity;
 import jakarta.persistence.*;
 /*
@@ -63,10 +64,15 @@ public class Member extends BaseEntity {
     @Column(name = "phone_number")
     private String phoneNumber;
 
-//    // Member(1) to MemberMission(N)
-//    // 'mappedBy = "member"' : MemberMission 엔티티에 있는 'member' 필드가 연관관계의 주인임을 명시
-//    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
-//    private List<MemberMission> memberMissionList = new ArrayList<>();
+    // Member(1) to MemberMission(N)
+    // mappedBy = "member"
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+    private List<MemberMission> memberMissionList = new ArrayList<>();
+
+    // Member(1) to Review(N)
+    // mappedBy = "member"
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+    private List<Review> reviewList = new ArrayList<>();
 
 
 }

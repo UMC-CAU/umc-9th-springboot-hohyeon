@@ -20,6 +20,7 @@ public class ReviewPhoto {
     @Column(name = "photo_url")
     private String photoUrl;
 
+    // ReviewPhoto(N) to review(1)
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "review_id")
     private Review review;

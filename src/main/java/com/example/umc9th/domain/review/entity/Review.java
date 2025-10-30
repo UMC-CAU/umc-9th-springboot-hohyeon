@@ -43,11 +43,18 @@ public class Review extends BaseEntity {
     @Column(name = "star")
     private Float star;
 
+    // Review(N) to Store(1)
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "store_id")
     private Store store;
 
+    // Review(N) to Member(1)
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private Member member;
+
+    // Review(1) to ReviewPhoto(N)
+    // mappedBy = "review"
+    @OneToMany(mappedBy = "review", cascade = CascadeType.ALL)
+    private List<ReviewPhoto> reviewPhotoList = new ArrayList<>();
 }

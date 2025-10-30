@@ -8,8 +8,10 @@ import jakarta.persistence.*;:
 @Entity, @Id, @Column 등 데이터베이스와 관련된 대부분의 어노테이션이 여기에 포함되어 있습니다.
 (javax.persistence.*에서 이름이 변경되었습니다.)
  */
-import jakarta.persistence.criteria.Fetch;
 import lombok.*;
+
+import java.util.ArrayList;
+import java.util.List;
 /*
 import lombok.*;:
 Lombok 라이브러리의 기능들을 가져옵니다.
@@ -31,5 +33,10 @@ public class Location {
 
     @Column(name = "name")
     private String name;
+
+    // Location(1) to Store(N)
+    // mappedBy = "location"
+    @OneToMany(mappedBy = "location", cascade = CascadeType.ALL)
+    private List<Store> storeList = new ArrayList<>();
 
 }
