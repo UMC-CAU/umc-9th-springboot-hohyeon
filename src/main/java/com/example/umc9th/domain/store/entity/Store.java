@@ -1,5 +1,7 @@
 package com.example.umc9th.domain.store.entity;
 
+import com.example.umc9th.domain.mission.entity.Mission;
+import com.example.umc9th.domain.review.entity.Review;
 import jakarta.persistence.*;
 /*
 import jakarta.persistence.*;:
@@ -9,6 +11,8 @@ import jakarta.persistence.*;:
  */
 import jakarta.persistence.criteria.Fetch;
 import lombok.*;
+import java.util.ArrayList;
+import java.util.List;
 /*
 import lombok.*;:
 Lombok 라이브러리의 기능들을 가져옵니다.
@@ -37,8 +41,19 @@ public class Store {
     @Column(name = "detail_address")
     private String detailAddress;
 
+    // Store(N) to Location(1)
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "location_id")
     private Location location;
+
+    // Store(1) to Mission(N)
+    // mappedBy = "store"
+    @OneToMany(mappedBy = "store", cascade = CascadeType.ALL)
+    private List<Mission> missionList = new ArrayList<>();
+
+    // Store(1) to Review(N)
+    // mappedBy = "store"
+    @OneToMany(mappedBy = "store", cascade = CascadeType.ALL)
+    private List<Review> reviewList = new ArrayList<>();
 
 }
