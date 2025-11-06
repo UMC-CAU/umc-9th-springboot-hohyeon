@@ -29,7 +29,7 @@ public class ReviewQueryService {
         Predicate predicate = buildDynamicPredicate(member, storeId, rating);
 
         // Repository에 완성된 '조건'과 '페이징'을 전달하여 호출
-        // (이 findMyReview는 Repository의 QueryDSL 구현체에 있는 메서드입니다)
+        // (이 findMyReview는 Repository의 QueryDSL 구현체에 있는 메서드)
         return reviewRepository.findMyReview(predicate, pageable);
     }
 
@@ -58,9 +58,9 @@ public class ReviewQueryService {
                 builder.and(review.star.goe(rating.doubleValue())
                         .and(review.star.lt(rating.doubleValue() + 1)));
             }
-            // (3점대, 2점대 등도 같은 방식으로 추가)
+
         }
 
-        return builder; // 👈 완성된 Predicate (WHERE 조건절) 반환
+        return builder; // 완성된 Predicate (WHERE 조건절) 반환
     }
 }
