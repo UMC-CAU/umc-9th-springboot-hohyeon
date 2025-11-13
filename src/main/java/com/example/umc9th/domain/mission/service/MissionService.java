@@ -25,7 +25,6 @@ public class MissionService {
 
     // (5) "내가 진행중/완료한 미션 조회" 비즈니스 로직
     public Page<MemberMissionResponseDto> getMyMissions(Long memberId, boolean isComplete, Integer page) {
-
         // 1. 사용자 엔티티 조회
         Member member = memberRepository.findById(memberId)
                 .orElseThrow(() -> new RuntimeException("사용자 없음"));
