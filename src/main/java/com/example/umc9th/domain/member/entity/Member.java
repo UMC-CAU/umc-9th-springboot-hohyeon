@@ -41,6 +41,7 @@ public class Member extends BaseEntity {
     @Column(name = "name")
     private String name;
 
+
     @Column(name = "gender")
     @Enumerated(EnumType.STRING)
     private Gender gender;
@@ -63,6 +64,9 @@ public class Member extends BaseEntity {
 
     @Column(name = "phone_number")
     private String phoneNumber;
+
+    @Column(name = "email")
+    private String email;
 
     // Member(1) to MemberMission(N)
     // mappedBy = "member"
