@@ -1,7 +1,9 @@
 package com.example.umc9th.domain.member.converter;
 
+import com.example.umc9th.domain.member.dto.MemberReqDto;
 import com.example.umc9th.domain.member.dto.MyPageResponseDto;
 import com.example.umc9th.domain.member.entity.Member;
+import com.example.umc9th.domain.member.enums.Gender;
 // import com.example.umc9th.domain.member.dto.MemberSignUpRequestDto; // (회원가입 DTO 예시)
 
 public class MemberConverter {
@@ -22,22 +24,31 @@ public class MemberConverter {
                 .build();
     }
 
-    /*
+    /**
      * DTO -> Entity (회원가입 시)
      * Controller가 받은 MemberSignUpRequestDto를 Member 엔티티로 변환(조립)합니다.
      */
 
-//    public static Member toMember(MemberSignUpRequestDto request) {
-//
-//        // DTO의 데이터를 엔티티의 빌더(Builder)에 넣어줍니다.
-//        return Member.builder()
-//                .name(request.getName())
-//                .gender(request.getGender())
-//                .birth(request.getBirth())
-//                .detailAddress(request.getDetailAddress())
-//                .phoneNumber(request.getPhoneNumber())
-//                .point(0) // (예: 신규 가입 포인트는 0으로 초기화)
-//                // (socialUid, socialType 등은 소셜 로그인 로직에서 별도 처리)
-//                .build();
-//    }
+    public static Member toMember(MemberReqDto.JoinDto request) {
+
+        // (성별 등 Enum 변환 로직이 필요하다면 여기서 처리)
+        // 1. 여기서 switch 문으로 정수를 Enum으로 변환 (가장 직관적인 방법!)
+        // 이걸 위해 MemberReqDto 에서 타입 일치를 위해 gender 형을 Integer 로 변경
+        Gender gender = switch (request.gender()) {
+            case 1 -> Gender.MALE;
+            case 2 -> Gender.FEMALE;
+            case 3 -> Gender.OTHER;
+            default -> null;
+        };
+
+        return Member.builder()
+                .name(request.name())
+                .nickname(request.nickname())
+                .birth(request.birth())
+                .detailAddress(request.detailAddress())
+                .email(request.email())
+                .phoneNumber(request.phoneNumber())
+                .point(0) // 초기 포인트 설정
+                .build();
+    }
 }

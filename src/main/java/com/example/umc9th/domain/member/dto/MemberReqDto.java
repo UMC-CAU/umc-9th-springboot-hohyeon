@@ -8,7 +8,8 @@ public class MemberReqDto {
     public record JoinDto(
             String name,
             String nickname,
-            Gender gender,
+            // Gender -> Integer 로 변경
+            Integer gender,
             LocalDate birth,
             String detailAddress,
             String email,
