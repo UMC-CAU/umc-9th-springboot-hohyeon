@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 
 public class MemberResDto {
     @Builder
-    public record JoinDTO(
+    public record JoinDto(
             Long memberId,
             LocalDateTime createAt
     ){}
