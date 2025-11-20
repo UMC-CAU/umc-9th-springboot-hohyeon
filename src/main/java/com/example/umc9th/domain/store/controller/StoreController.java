@@ -4,7 +4,7 @@ import com.example.umc9th.domain.review.entity.Review;
 import com.example.umc9th.domain.store.converter.StoreConverter;
 import com.example.umc9th.domain.store.dto.StoreReqDto;
 import com.example.umc9th.domain.store.dto.StoreResDto;
-import com.example.umc9th.domain.store.service.StoreCommandService;
+import com.example.umc9th.domain.store.service.command.StoreCommandService;
 import com.example.umc9th.global.apiPayLoad.ApiResponse;
 import com.example.umc9th.global.apiPayLoad.code.GeneralSuccessCode;
 import jakarta.validation.Valid;

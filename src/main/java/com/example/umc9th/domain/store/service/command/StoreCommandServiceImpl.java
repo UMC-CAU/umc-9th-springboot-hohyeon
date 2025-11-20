@@ -8,7 +8,7 @@ import com.example.umc9th.domain.store.converter.StoreConverter;
 import com.example.umc9th.domain.store.dto.StoreReqDto;
 import com.example.umc9th.domain.store.entity.Store;
 import com.example.umc9th.domain.store.repository.StoreRepository;
-import com.example.umc9th.domain.store.service.StoreCommandService;
+import com.example.umc9th.domain.store.service.command.StoreCommandService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

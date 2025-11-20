@@ -1,4 +1,4 @@
-package com.example.umc9th.domain.store.service;
+package com.example.umc9th.domain.store.service.command;
 
 import com.example.umc9th.domain.store.dto.StoreReqDto;
 import com.example.umc9th.domain.review.entity.Review;
