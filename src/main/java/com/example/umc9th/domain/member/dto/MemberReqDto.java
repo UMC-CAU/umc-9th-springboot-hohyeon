@@ -3,6 +3,7 @@ package com.example.umc9th.domain.member.dto;
 import com.example.umc9th.domain.member.enums.Gender;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class MemberReqDto {
     public record JoinDto(
@@ -13,6 +14,7 @@ public class MemberReqDto {
             LocalDate birth,
             String detailAddress,
             String email,
-            String phoneNumber
+            String phoneNumber,
+            List<Long> preferCategory
     ){}
 }

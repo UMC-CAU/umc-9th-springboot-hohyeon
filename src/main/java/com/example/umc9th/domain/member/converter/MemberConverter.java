@@ -1,6 +1,7 @@
 package com.example.umc9th.domain.member.converter;
 
 import com.example.umc9th.domain.member.dto.MemberReqDto;
+import com.example.umc9th.domain.member.dto.MemberResDto;
 import com.example.umc9th.domain.member.dto.MyPageResponseDto;
 import com.example.umc9th.domain.member.entity.Member;
 import com.example.umc9th.domain.member.enums.Gender;
@@ -49,6 +50,13 @@ public class MemberConverter {
                 .email(request.email())
                 .phoneNumber(request.phoneNumber())
                 .point(0) // 초기 포인트 설정
+                .build();
+    }
+    // Entity -> DTO
+    public static MemberResDto.JoinDto toJoinDTO(Member member){
+        return MemberResDto.JoinDto.builder()
+                .memberId(member.getId())
+                .createAt(member.getCreatedAt())
                 .build();
     }
 }
