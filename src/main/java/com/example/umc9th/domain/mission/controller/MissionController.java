@@ -1,11 +1,12 @@
 package com.example.umc9th.domain.mission.controller;
 
 import com.example.umc9th.domain.mission.converter.MemberMissionConverter;
-import com.example.umc9th.domain.mission.dto.MemberMissionReqDto;
-import com.example.umc9th.domain.mission.dto.MemberMissionResDto;
-import com.example.umc9th.domain.mission.dto.MemberMissionResponseDto;
+import com.example.umc9th.domain.mission.converter.MissionConverter;
+import com.example.umc9th.domain.mission.dto.*;
 import com.example.umc9th.domain.mission.entity.MemberMission;
+import com.example.umc9th.domain.mission.entity.Mission;
 import com.example.umc9th.domain.mission.service.command.MemberMissionCommandService;
+import com.example.umc9th.domain.mission.service.command.MissionCommandService;
 import com.example.umc9th.domain.mission.service.query.MemberMissionQueryService;
 import com.example.umc9th.global.apiPayLoad.ApiResponse;
 import com.example.umc9th.global.apiPayLoad.code.GeneralSuccessCode;
@@ -21,6 +22,7 @@ public class MissionController {
 
     private final MemberMissionCommandService memberMissionCommandService; // 도전하기(생성) 담당
     private final MemberMissionQueryService memberMissionQueryService;     // 조회(읽기) 담당
+    private final MissionCommandService missionCommandService;
 
     /**
      * 1. 미션 도전하기 API
@@ -60,5 +62,17 @@ public class MissionController {
 
         // 2. 성공 응답 반환 (OK: 200)
         return ApiResponse.onSuccess(GeneralSuccessCode.OK, myMissionPage);
+    }
+
+    /**
+     * 가게에 미션 추가하기 API
+     * [POST] /missions
+     */
+    @PostMapping
+    public ApiResponse<MissionResDto.CreateMissionResultDto> createMission(
+            @RequestBody @Valid MissionReqDto.CreateMissionDto request
+    ) {
+        Mission mission = missionCommandService.createMission(request);
+        return ApiResponse.onSuccess(GeneralSuccessCode.CREATED, MissionConverter.toCreateMissionResultDto(mission));
     }
 }
