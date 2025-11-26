@@ -16,7 +16,7 @@ public class MemberFood {
     private Long id;
 
     // MemberFood(1) to Member(1)
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
 

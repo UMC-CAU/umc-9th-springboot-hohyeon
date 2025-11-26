@@ -1,9 +1,13 @@
 package com.example.umc9th.domain.mission.converter;
 
-import com.example.umc9th.domain.mission.dto.MemberMissionResponseDto; // 👈 1. 새로운 DTO import
+import com.example.umc9th.domain.mission.dto.MemberMissionResponseDto; //  1. 새로운 DTO import
+import com.example.umc9th.domain.mission.dto.MissionReqDto;
+import com.example.umc9th.domain.mission.dto.MissionResDto;
 import com.example.umc9th.domain.mission.entity.MemberMission;
 import com.example.umc9th.domain.mission.entity.Mission;
+import com.example.umc9th.domain.store.entity.Store;
 import org.springframework.data.domain.Page;
+import java.time.LocalDateTime;
 
 public class MissionConverter {
 
@@ -19,9 +23,9 @@ public class MissionConverter {
 
         // 2. DTO를 조립합니다.
         return MemberMissionResponseDto.builder()
-                .conditional(mission.getConditional()) // 👈 3. DTO의 conditional 필드 매핑
-                .point(mission.getPoint())             // 👈 4. DTO의 point 필드 매핑
-                .isComplete(memberMission.isComplete()) // 👈 5. DTO의 isComplete 필드 매핑
+                .conditional(mission.getConditional()) //  3. DTO의 conditional 필드 매핑
+                .point(mission.getPoint())             //  4. DTO의 point 필드 매핑
+                .isComplete(memberMission.isComplete()) //  5. DTO의 isComplete 필드 매핑
                 .build();
     }
 
@@ -34,5 +38,21 @@ public class MissionConverter {
         // 6. .map()이 호출하는 메서드를 위에서 수정한 toMyMissionDto로 변경
         // (반환 타입도 Page<MemberMissionResponseDto>로 자동 변경됨)
         return missionPage.map(MissionConverter::toMyMissionDto);
+    }
+
+    public static Mission toMission(MissionReqDto.CreateMissionDto request, Store store) {
+        return Mission.builder()
+                .point(request.getPoint())
+                .deadline(request.getDeadline().atStartOfDay()) // LocalDate -> LocalDateTime 변환
+                .conditional(request.getConditional())
+                .store(store)
+                .build();
+    }
+
+    public static MissionResDto.CreateMissionResultDto toCreateMissionResultDto(Mission mission) {
+        return MissionResDto.CreateMissionResultDto.builder()
+                .missionId(mission.getId())
+                .createdAt(LocalDateTime.now())
+                .build();
     }
 }

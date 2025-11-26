@@ -41,6 +41,8 @@ public class Member extends BaseEntity {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "nickname")
+    private String nickname;
 
     @Column(name = "gender")
     @Enumerated(EnumType.STRING)
@@ -77,6 +79,11 @@ public class Member extends BaseEntity {
     // mappedBy = "member"
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<Review> reviewList = new ArrayList<>();
+
+    // Member(1) to MemberFood
+    // mappedBy = "member"
+    @OneToMany(mappedBy = "member",cascade = CascadeType.ALL)
+    private List<MemberFood> memberFoodList = new ArrayList<>();
 
 
 }
