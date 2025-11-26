@@ -5,7 +5,7 @@ import com.example.umc9th.domain.review.exception.code.ReviewSuccessCode;
 import com.example.umc9th.global.apiPayLoad.ApiResponse;
 import org.springframework.web.bind.annotation.GetMapping;
 
-public class ReviewController {
+public class ReviewController implements ReviewControllerDocs {
     // 가게의 리뷰 목록 조회
     @GetMapping("/reviews")
     public ApiResponse<ReviewResDto.ReviewPreViewListDto> getReviews(){

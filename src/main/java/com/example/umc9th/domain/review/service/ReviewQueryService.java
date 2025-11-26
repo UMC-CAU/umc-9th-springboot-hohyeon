@@ -21,13 +21,10 @@ public class ReviewQueryService {
 
     // Repository 주입 (QueryDSL 기능이 합쳐진)
     private final ReviewRepository reviewRepository;
-
     // 작성한 메서드 완성
     public Page<Review> findMyReview(Member member, Long storeId, Integer rating, Pageable pageable) {
-
         // Predicate(동적 조건) 조립 (아래 private 메서드 호출)
         Predicate predicate = buildDynamicPredicate(member, storeId, rating);
-
         // Repository에 완성된 '조건'과 '페이징'을 전달하여 호출
         // (이 findMyReview는 Repository의 QueryDSL 구현체에 있는 메서드)
         return reviewRepository.findMyReview(predicate, pageable);
@@ -38,16 +35,13 @@ public class ReviewQueryService {
      */
     private Predicate buildDynamicPredicate(Member member, Long storeId, Integer rating) {
         BooleanBuilder builder = new BooleanBuilder();
-
         // 1. 기본 조건: 내가 쓴 리뷰
         // QReview.review.member... 대신 static import한 review.member... 사용
         builder.and(review.member.eq(member));
-
         // 2. 동적 조건 1: 가게 ID (null이 아닐 때만 조건 추가)
         if (storeId != null) {
             builder.and(review.store.id.eq(storeId));
         }
-
         // 3. 동적 조건 2: 별점대 (null이 아닐 때만 조건 추가)
         if (rating != null) {
             if (rating == 5) {
@@ -58,7 +52,6 @@ public class ReviewQueryService {
                 builder.and(review.star.goe(rating.doubleValue())
                         .and(review.star.lt(rating.doubleValue() + 1)));
             }
-
         }
         return builder; // 완성된 Predicate (WHERE 조건절) 반환
     }
