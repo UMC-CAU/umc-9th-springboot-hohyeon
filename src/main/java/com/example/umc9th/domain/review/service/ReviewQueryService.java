@@ -33,7 +33,7 @@ public class ReviewQueryService {
         return reviewRepository.findMyReview(predicate, pageable);
     }
 
-    /*
+    /**
      * 동적 쿼리 조건(Predicate)을 생성하는 헬퍼 메서드
      */
     private Predicate buildDynamicPredicate(Member member, Long storeId, Integer rating) {
@@ -60,7 +60,6 @@ public class ReviewQueryService {
             }
 
         }
-
         return builder; // 완성된 Predicate (WHERE 조건절) 반환
     }
 }
