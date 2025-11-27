@@ -16,4 +16,5 @@ public interface ReviewControllerDocs {
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "400", description = "실패")
     })
     ApiResponse<ReviewResDto.ReviewPreViewListDto> getStoreReviews(String storeName, Integer page);
+    ApiResponse<ReviewResDto.ReviewPreViewListDto> getMyReviews(Long memberId,  Integer page);
 }

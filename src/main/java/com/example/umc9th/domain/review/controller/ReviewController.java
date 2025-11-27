@@ -30,12 +30,20 @@ public class ReviewController implements ReviewControllerDocs {
     }
 
     // 가게의 리뷰 목록 조회
-    @GetMapping("/reviews")
+    @GetMapping("/store-reviews")
     public ApiResponse<ReviewResDto.ReviewPreViewListDto> getStoreReviews(
             @RequestParam String storeName,
             @RequestParam Integer page
     ){
         ReviewSuccessCode code = ReviewSuccessCode.FOUND;
         return ApiResponse.onSuccess(code, reviewQueryService.findStoreReview(storeName,page));
+    }
+
+    public ApiResponse<ReviewResDto.ReviewPreViewListDto> getMyReviews(
+            @RequestParam Long memberId,
+            @RequestParam Integer page
+    ){
+        ReviewSuccessCode code = ReviewSuccessCode.FOUND;
+        return ApiResponse.onSuccess(code, reviewQueryService.findMyReview(memberId,page));
     }
 }

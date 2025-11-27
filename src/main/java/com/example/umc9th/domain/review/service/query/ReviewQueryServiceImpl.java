@@ -1,5 +1,9 @@
 package com.example.umc9th.domain.review.service.query;
 
+import com.example.umc9th.domain.member.entity.Member;
+import com.example.umc9th.domain.member.exception.MemberException;
+import com.example.umc9th.domain.member.exception.code.MemberErrorCode;
+import com.example.umc9th.domain.member.repository.MemberRepository;
 import com.example.umc9th.domain.review.converter.ReviewConverter;
 import com.example.umc9th.domain.review.dto.ReviewResDto;
 import com.example.umc9th.domain.review.entity.Review;
@@ -26,7 +30,9 @@ public class ReviewQueryServiceImpl implements ReviewQueryService {
 
     private final ReviewRepository reviewRepository;
     private final StoreRepository storeRepository;
+    private final MemberRepository memberRepository;
 
+    // 현재 searchReview를 오버라이드 하지 않으면 오류 발생 ...
     @Override
     public List<Review> searchReview(String filter, String type) throws Exception {
         return List.of();
@@ -47,6 +53,21 @@ public class ReviewQueryServiceImpl implements ReviewQueryService {
         Page<Review> result = reviewRepository.findAllByStore(store, pageRequest);
 
         //- 결과를 응답 DTO로 변환한다 (컨버터 이용)
+        return ReviewConverter.toReviewPreviewListDto(result);
+    }
+
+    @Override
+    public ReviewResDto.ReviewPreViewListDto findMyReview(
+            Long memberId, Integer page
+    ){
+        Member member = memberRepository.findById(memberId)
+                .orElseThrow(() -> new MemberException(MemberErrorCode.NOT_FOUND));
+
+        // 페이지 번호 조정 (1 -> 0)
+        // pageSize는 요구사항대로 10개로 설정
+        PageRequest pageRequest = PageRequest.of(page - 1, 10);
+        Page<Review> result = reviewRepository.findAllByMember(member, pageRequest);
+
         return ReviewConverter.toReviewPreviewListDto(result);
     }
 }
