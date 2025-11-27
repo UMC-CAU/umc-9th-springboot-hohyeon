@@ -5,9 +5,13 @@ import com.example.umc9th.domain.mission.dto.MissionReqDto;
 import com.example.umc9th.domain.mission.dto.MissionResDto;
 import com.example.umc9th.domain.mission.entity.MemberMission;
 import com.example.umc9th.domain.mission.entity.Mission;
+import com.example.umc9th.domain.review.converter.ReviewConverter;
+import com.example.umc9th.domain.review.dto.ReviewResDto;
 import com.example.umc9th.domain.store.entity.Store;
 import org.springframework.data.domain.Page;
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class MissionConverter {
 
@@ -55,4 +59,32 @@ public class MissionConverter {
                 .createdAt(LocalDateTime.now())
                 .build();
     }
+
+    // Entity -> DTO (개별 변환)
+    public static MissionResDto.MissionPreViewDto toMissionPreViewDto(Mission mission) {
+        return MissionResDto.MissionPreViewDto.builder()
+                .missionId(mission.getId())
+                .point(mission.getPoint())
+                .deadline(mission.getDeadline().toLocalDate())
+                .conditional(mission.getConditional())
+                .build();
+    }
+
+    // Page -> List DTO (목록 변환)
+    public static MissionResDto.MissionPreViewListDto toMissionPreViewListDto(Page<Mission> missionList) {
+
+        List<MissionResDto.MissionPreViewDto> missionPreViewDtoList = missionList.stream()
+                .map(MissionConverter::toMissionPreViewDto)
+                .collect(Collectors.toList());
+
+        return MissionResDto.MissionPreViewListDto.builder()
+                .isLast(missionList.isLast())
+                .isFirst(missionList.isFirst())
+                .totalPage(missionList.getTotalPages())
+                .totalElements(missionList.getTotalElements())
+                .listSize(missionPreViewDtoList.size())
+                .missionList(missionPreViewDtoList)
+                .build();
+    }
+
 }
