@@ -38,7 +38,7 @@ public class ReviewController implements ReviewControllerDocs {
         ReviewSuccessCode code = ReviewSuccessCode.FOUND;
         return ApiResponse.onSuccess(code, reviewQueryService.findStoreReview(storeName,page));
     }
-
+    @GetMapping("/my-reviews")
     public ApiResponse<ReviewResDto.ReviewPreViewListDto> getMyReviews(
             @RequestParam Long memberId,
             @RequestParam Integer page

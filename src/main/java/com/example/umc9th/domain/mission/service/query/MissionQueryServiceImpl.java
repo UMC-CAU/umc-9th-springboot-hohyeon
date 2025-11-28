@@ -25,7 +25,7 @@ public class MissionQueryServiceImpl implements MissionQueryService {
     @Override
     public MissionResDto.MissionPreViewListDto findStoreMission(Long storeId, Integer page) {
         // - 가게를 가져온다 (가게 존재 여부 검증)
-        Store store = storeRepository.findByStoreId(storeId)
+        Store store = storeRepository.findById(storeId)
                 //    - 없으면 예외 터뜨린다
                 .orElseThrow(() -> new StoreException(StoreErrorCode.NOT_FOUND));
         //- 가게에 맞는 리뷰를 가져온다 (Offset 페이징)

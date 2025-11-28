@@ -1,5 +1,6 @@
 package com.example.umc9th.domain.mission.controller;
 
+import com.example.umc9th.domain.mission.dto.MemberMissionResDto;
 import com.example.umc9th.domain.review.dto.ReviewResDto;
 import com.example.umc9th.global.apiPayLoad.ApiResponse;
 import io.swagger.v3.oas.annotations.Operation;
@@ -15,5 +16,5 @@ public interface MemberMissionControllerDocs {
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "성공"),
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "400", description = "실패")
     })
-    ApiResponse<ReviewResDto.ReviewPreViewListDto> getMyMissionList(Long memberId, Integer page);
+    ApiResponse<MemberMissionResDto.MyMissionPreViewListDto> getMyMissionList(Long memberId, Integer page);
 }

@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/member-missions") // ✅ 주소 분리!
-public class MemberMissionController {
+public class MemberMissionController implements MemberMissionControllerDocs {
 
     private final MemberMissionCommandService memberMissionCommandService;
     private final MemberMissionQueryService memberMissionQueryService;

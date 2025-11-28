@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/missions")
-public class MissionController {
+public class MissionController implements MissionControllerDocs {
     private final MissionCommandService missionCommandService;
     private final MissionQueryService missionQueryService;
     /*
