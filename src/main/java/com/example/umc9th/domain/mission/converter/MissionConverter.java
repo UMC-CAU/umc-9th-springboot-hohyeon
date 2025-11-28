@@ -61,7 +61,7 @@ public class MissionConverter {
     }
 
     // Entity -> DTO (개별 변환)
-    public static MissionResDto.MissionPreViewDto toMemberMissionPreViewDto(Mission mission) {
+    public static MissionResDto.MissionPreViewDto toStoreMissionPreViewDto(Mission mission) {
         return MissionResDto.MissionPreViewDto.builder()
                 .missionId(mission.getId())
                 .point(mission.getPoint())
@@ -71,10 +71,10 @@ public class MissionConverter {
     }
 
     // Page -> List DTO (목록 변환)
-    public static MissionResDto.MissionPreViewListDto toMemberMissionPreViewListDto(Page<Mission> missionList) {
+    public static MissionResDto.MissionPreViewListDto toStoreMissionPreViewListDto(Page<Mission> missionList) {
 
         List<MissionResDto.MissionPreViewDto> missionPreViewDtoList = missionList.stream()
-                .map(MissionConverter::toMemberMissionPreViewDto)
+                .map(MissionConverter::toStoreMissionPreViewDto)
                 .collect(Collectors.toList());
 
         return MissionResDto.MissionPreViewListDto.builder()
