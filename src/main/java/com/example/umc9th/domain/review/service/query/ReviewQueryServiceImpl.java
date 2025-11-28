@@ -62,12 +62,10 @@ public class ReviewQueryServiceImpl implements ReviewQueryService {
     ){
         Member member = memberRepository.findById(memberId)
                 .orElseThrow(() -> new MemberException(MemberErrorCode.NOT_FOUND));
-
         // 페이지 번호 조정 (1 -> 0)
         // pageSize는 요구사항대로 10개로 설정
         PageRequest pageRequest = PageRequest.of(page - 1, 10);
         Page<Review> result = reviewRepository.findAllByMember(member, pageRequest);
-
         return ReviewConverter.toReviewPreviewListDto(result);
     }
 }

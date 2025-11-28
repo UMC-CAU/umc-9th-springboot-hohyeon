@@ -1,11 +1,14 @@
 package com.example.umc9th.domain.mission.service.query;
 
 import com.example.umc9th.domain.member.entity.Member;
+import com.example.umc9th.domain.member.exception.MemberException;
+import com.example.umc9th.domain.member.exception.code.MemberErrorCode;
 import com.example.umc9th.domain.member.repository.MemberRepository;
+import com.example.umc9th.domain.mission.converter.MemberMissionConverter;
 import com.example.umc9th.domain.mission.converter.MissionConverter;
+import com.example.umc9th.domain.mission.dto.MemberMissionResDto;
 import com.example.umc9th.domain.mission.dto.MemberMissionResponseDto;
 import com.example.umc9th.domain.mission.dto.MissionPreviewDto;
-import com.example.umc9th.domain.mission.dto.MemberMissionReqDto;
 import com.example.umc9th.domain.mission.entity.MemberMission;
 import com.example.umc9th.domain.mission.entity.Mission;
 import com.example.umc9th.domain.mission.repository.MemberMissionRepository;
@@ -17,9 +20,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
 
 @Service
 @RequiredArgsConstructor
@@ -56,5 +56,18 @@ public class MemberMissionQueryServiceImpl implements MemberMissionQueryService 
                     .point(mission.getPoint())
                     .build();
         });
+    }
+
+    @Override
+    public MemberMissionResDto.MyMissionPreViewListDto getMyMissionList(Long memberId, boolean isComplete, Integer page) {
+        // 1. 회원 확인
+        Member member = memberRepository.findById(memberId)
+                .orElseThrow(() -> new MemberException(MemberErrorCode.NOT_FOUND));
+        // 2. 페이징 (0부터 시작하므로 -1 처리)
+        PageRequest pageRequest = PageRequest.of(page - 1, 10);
+        // 3. Repository 호출
+        Page<MemberMission> result = memberMissionRepository.findByMemberAndIsComplete(member, isComplete, pageRequest);
+        // 4. 변환
+        return MemberMissionConverter.toMyMissionPreviewListDto(result);
     }
 }

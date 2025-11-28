@@ -32,6 +32,6 @@ public class MissionQueryServiceImpl implements MissionQueryService {
         PageRequest pageRequest = PageRequest.of(page-1, 10);
         Page<Mission> result = missionRepository.findAllByStore(store, pageRequest);
 
-        return MissionConverter.toMissionPreViewListDto(result);
+        return MissionConverter.toMemberMissionPreViewListDto(result);
     }
 }
