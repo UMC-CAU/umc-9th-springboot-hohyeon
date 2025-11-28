@@ -57,10 +57,10 @@ public class MemberMissionController {
     @GetMapping("/check-mission-notComplete")
     public ApiResponse<MemberMissionResDto.MyMissionPreViewListDto> getMyMissionList(
             @RequestParam Long memberId,
-            @RequestParam boolean isComplete,
+            //@RequestParam boolean isComplete,
             @RequestParam Integer page
     ){
         MemberMissionSuccessCode code = MemberMissionSuccessCode.FOUND;
-        return ApiResponse.onSuccess(code, memberMissionQueryService.getMyMissionList(memberId,isComplete,page));
+        return ApiResponse.onSuccess(code, memberMissionQueryService.getMyMissionList(memberId,false,page));
     }
 }
