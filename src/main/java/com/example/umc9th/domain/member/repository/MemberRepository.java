@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface MemberRepository extends JpaRepository<Member, Long> {
     Optional<Member> findMemberById(Long id);
-
+    Optional<Member> findByEmail(String email);
     /*
     Optional을 추가한 이유?
     : 데이터베이스에 해당 멤버의 ID가 없으면 이 메서드가 null을 반환하여 NPE 발생
