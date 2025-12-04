@@ -7,6 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import com.example.umc9th.domain.store.entity.Store;
 
 public interface MissionRepository extends JpaRepository<Mission, Long> {
     @Query(value = """
@@ -32,4 +33,6 @@ public interface MissionRepository extends JpaRepository<Mission, Long> {
             @Param("region") String region,
             Pageable pageable
     );
+    //  가게별 미션 조회 + 페이징
+    Page<Mission> findAllByStore(Store store, Pageable pageable);
 }
