@@ -14,6 +14,8 @@ public class MemberReqDto {
             String name,
             @NotBlank
             String nickname,
+            @NotBlank
+            String password, // 추가된 속성
             // Gender -> Integer 로 변경
             @NotNull
             Integer gender,

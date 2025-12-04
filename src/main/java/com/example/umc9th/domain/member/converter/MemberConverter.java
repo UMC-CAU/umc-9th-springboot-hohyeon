@@ -47,6 +47,8 @@ public class MemberConverter {
                 .name(dto.name())
                 .nickname(dto.nickname())
                 .birth(dto.birth())
+                .password(password)     // 추가된 코드
+                .role(role)         // 추가된 코드
                 .detailAddress(dto.detailAddress())
                 .email(dto.email())
                 .phoneNumber(dto.phoneNumber())
@@ -54,7 +56,7 @@ public class MemberConverter {
                 .build();
     }
     // Entity -> DTO
-    public static MemberResDto.JoinDto toJoinDTO(Member member){
+    public static MemberResDto.JoinDto toJoinDto(Member member){
         return MemberResDto.JoinDto.builder()
                 .memberId(member.getId())
                 .createAt(member.getCreatedAt())
