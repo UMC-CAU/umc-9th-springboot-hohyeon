@@ -10,10 +10,13 @@ import com.example.umc9th.global.auth.enums.Role;
 
 public class MemberConverter {
 
+
+
     /**
      * Entity -> DTO (마이페이지 조회 시)
      * Service가 조회한 Member 엔티티를 MyPageResponseDto로 변환(포장)합니다.
      */
+
     public static MyPageResponseDto toMyPageDto(Member member) {
 
         // Member 엔티티의 필드에서 DTO에 필요한 정보만 뽑아서
@@ -60,6 +63,12 @@ public class MemberConverter {
         return MemberResDto.JoinDto.builder()
                 .memberId(member.getId())
                 .createAt(member.getCreatedAt())
+                .build();
+    }
+    public static MemberResDto.LoginDto toLoginDto(Member member, String accessToken) {
+        return MemberResDto.LoginDto.builder()
+                .memberId(member.getId())
+                .accessToken(accessToken)
                 .build();
     }
 }
