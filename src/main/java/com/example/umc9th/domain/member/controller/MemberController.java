@@ -9,6 +9,7 @@ import com.example.umc9th.domain.member.service.command.MemberCommandService;
 import com.example.umc9th.domain.member.service.query.MemberQueryService;
 import com.example.umc9th.global.apiPayLoad.ApiResponse; // 1. ApiResponse import
 import com.example.umc9th.global.apiPayLoad.code.GeneralSuccessCode; // 2. 성공 코드 import
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,7 +27,6 @@ public class MemberController {
     ){
         return ApiResponse.onSuccess(MemberSuccessCode.FOUND, memberCommandService.signup(dto));
     }
-
     // "마이 페이지 조회" API
     @GetMapping("/me")
     // 반환 타입을 ApiResponse<MyPageResponseDto>로 변경
@@ -38,5 +38,12 @@ public class MemberController {
 
         // ApiResponse.onSuccess()로 '성공 포장'하여 최종 반환
         return ApiResponse.onSuccess(GeneralSuccessCode.OK, responseDto);
+    }
+    // 로그인
+    @PostMapping("/login")
+    public ApiResponse<MemberResDto.LoginDto> login(
+            @RequestBody @Valid MemberReqDto.LoginDto dto
+    ){
+        return ApiResponse.onSuccess(MemberSuccessCode.FOUND, memberQueryService.login(dto));
     }
 }
