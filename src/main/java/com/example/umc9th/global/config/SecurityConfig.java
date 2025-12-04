@@ -13,10 +13,10 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
     private final String[] allowUris = {
-//							// Swagger 허용
-//            "/swagger-ui/**",
-//            "/swagger-resources/**",
-//            "/v3/api-docs/**",
+							// Swagger 허용
+            "/swagger-ui/**",
+            "/swagger-resources/**",
+            "/v3/api-docs/**",
     };
 
     @Bean
