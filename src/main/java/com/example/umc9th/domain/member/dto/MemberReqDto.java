@@ -29,4 +29,12 @@ public class MemberReqDto {
             String phoneNumber,
             List<Long> preferCategory
     ){}
+
+    // 로그인
+    public record LoginDto(
+            @NotBlank
+            String email,
+            @NotBlank
+            String password
+    ){}
 }
