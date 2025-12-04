@@ -1,9 +1,7 @@
-package com.example.umc9th.global.auth.service;
+package com.example.umc9th.global.auth;
 
 import com.example.umc9th.global.apiPayLoad.ApiResponse;
 import com.example.umc9th.global.apiPayLoad.code.GeneralErrorCode;
-import com.example.umc9th.global.auth.CustomUserDetailsService;
-import com.example.umc9th.global.auth.JwtUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
