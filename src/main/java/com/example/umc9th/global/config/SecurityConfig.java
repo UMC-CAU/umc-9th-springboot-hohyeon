@@ -23,6 +23,8 @@ public class SecurityConfig {
     private final CustomUserDetailsService customUserDetailsService;
 
     private final String[] allowUris = {
+            "login",
+            "/members/login",
             "/members/sign-up",
             "/swagger-ui/**",
             "/swagger-resources/**",
