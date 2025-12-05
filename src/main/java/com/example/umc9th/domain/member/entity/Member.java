@@ -5,6 +5,7 @@ import com.example.umc9th.domain.member.enums.Gender;
 import com.example.umc9th.domain.member.enums.SocialType;
 import com.example.umc9th.domain.mission.entity.MemberMission;
 import com.example.umc9th.domain.review.entity.Review;
+import com.example.umc9th.global.auth.enums.Role;
 import com.example.umc9th.global.entity.BaseEntity;
 import jakarta.persistence.*;
 /*
@@ -67,8 +68,14 @@ public class Member extends BaseEntity {
     @Column(name = "phone_number")
     private String phoneNumber;
 
-    @Column(name = "email")
+    @Column(name = "email", nullable = false, unique = true)
     private String email;
+
+    @Column(nullable = false)
+    private String password;
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     // Member(1) to MemberMission(N)
     // mappedBy = "member"
